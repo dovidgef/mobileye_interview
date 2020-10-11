@@ -2,41 +2,41 @@
 # so that each part is no longer than 10 symbols,
 # the words of 10 symbols and less are never split,
 # and there are no unnecessary splits.
-section = ''
 
+class SpecialString:
+    def __init__(self, string):
+        self.result = []
+        self.string_words = string.split()
+        self.section = ''
+        
+    def add_section(self):
+        if self.section:
+            self.result.append(self.section.rstrip())
+        self.section = ''
 
-def add_section(result):
-    """Add section if it exists"""
-    global section
-    if section:
-        result.append(section.rstrip())
-    section = ''
+    def add_result(self, *args):
+        """Accept variable number of arguments to simplify appending to results array"""
+        self.result += args
 
 
 def split_string(string):
-    string_words = string.split()
-    result = []
-    global section
+    string = SpecialString(string)
 
-    for word in string_words:
+    for word in string.string_words:
         word_length = len(word)
-        section_length = len(section)
+        section_length = len(string.section)
 
         if word_length == 10:
-            add_section(result)
-            result.append(word)
+            string.add_section()
+            string.add_result(word)
         elif word_length > 10:
-            add_section(result)
-            result += (word[:10], word[10:])
+            string.add_section()
+            string.add_result(word[:10], word[10:])
         else:
             if section_length + word_length >= 10:
-                add_section(result)
-            section += word + ' '
+                string.add_section()
+            string.section += word + ' '
 
-    add_section(result)
+    string.add_section()
 
-    return result
-
-
-# print(split_string("what a disgusting food"))
-
+    return string.result
