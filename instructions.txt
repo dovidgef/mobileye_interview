@@ -1,0 +1,8 @@
+Given a line of letters and spaces, split it to parts so that each part is no longer than 10 symbols, the words of 10 symbols and
+less are never split, and there are no unnecessary splits.
+
+Examples: "hi hi hi" -> ["hi hi hi"] and not ["hi" "hi" "hi"]; "hey hey hey" -> ["hey hey", "hey"] or ["hey", "hey hey"]
+but not ["hey", "hey", "hey"];
+"what a disgusting food" -> ["what a", "disgusting", "food"];
+"Avadakedavra alohomora" -> ["Avadakedav", "ra", "alohomora"] or alike, but never ["Avadakedav", "ra alohomo", "ra"].
+No optimizations needed, no ideal solution needed. As simple as it is put here.
